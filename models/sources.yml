@@ -1,0 +1,41 @@
+
+version: 2
+
+sources:
+  - name: my_fresh_source
+    database: "{{ target.database }}"
+    schema: "{{ target.schema }}"
+
+    loaded_at_field: loaded_at
+    freshness:
+        warn_after: {count: 100, period: day}
+        error_after: {count: 100, period: day}
+
+    tables:
+        - name: source_table_1
+          identifier: fake
+        - name: source_table_2
+          identifier: fake
+        - name: source_table_3
+          identifier: fake
+        - name: source_table_4
+          identifier: fake
+
+  - name: my_stale_source
+    database: "{{ target.database }}"
+    schema: "{{ target.schema }}"
+
+    loaded_at_field: loaded_at
+    freshness:
+         warn_after: {count: 0, period: minute}
+         error_after: {count: 1, period: minute}
+
+    tables:
+        - name: source_table_1
+          identifier: fake
+        - name: source_table_2
+          identifier: fake
+        - name: source_table_3
+          identifier: fake
+        - name: source_table_4
+          identifier: fake
